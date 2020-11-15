@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/FirstLevel.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/Leaderboard.unity
+    path: Assets/Scenes/Leaderboard1.unity
     guid: 037661922b049410f8122a3577be2bca
   - enabled: 1
     path: Assets/Scenes/ChangeName.unity
@@ -26,4 +26,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Avatar Select.unity
     guid: 8cb21e176506045e3af0d56220b98f3c
+  - enabled: 1
+    path: Assets/Scenes/SecondLevel.unity
+    guid: a8f3e7cfe0211d84b8c6a164fb1fa13a
+  - enabled: 1
+    path: Assets/Scenes/Tutorial.unity
+    guid: ee99d28159f084c8b83073d958d6b723
+  - enabled: 1
+    path: Assets/Scenes/Leaderboard2.unity
+    guid: e0b8b7871ac3d1c40a4885e08adc401d
   m_configObjects: {}

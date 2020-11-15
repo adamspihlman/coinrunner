@@ -20,9 +20,13 @@ namespace Platformer.Gameplay
         {
             model.player.animator.SetTrigger("victory");
             model.player.controlEnabled = false;
-            Globals.saveScore();
+            if (Globals.isUsernameSet)
+            {
+                Globals.saveScore();
+            }
             Globals.resetScore();
-            SceneManager.LoadScene("Leaderboard");
+            var arg = "Leaderboard" + Globals.getLevel();
+            SceneManager.LoadScene(arg);
         }
     }
 }

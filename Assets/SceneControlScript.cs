@@ -16,8 +16,14 @@ public class SceneControlScript : MonoBehaviour
         
     }
     
-    public void startGame() {
+    public void startLevelOne() {
         SceneManager.LoadScene("FirstLevel");
+        Globals.setLevel(1);
+    }
+    
+    public void startLevelTwo() {
+        SceneManager.LoadScene("SecondLevel");
+        Globals.setLevel(2);
     }
     
     public void goToBeginGame() {
@@ -28,8 +34,12 @@ public class SceneControlScript : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
     
-    public void goToLeaderboard() {
-        SceneManager.LoadScene("Leaderboard");
+    public void goToLeaderboard1() {
+        SceneManager.LoadScene("Leaderboard1");
+    }
+
+    public void goToLeaderboard2() {
+        SceneManager.LoadScene("Leaderboard2");
     }
     
     public void goToNameChange() {
@@ -43,4 +53,16 @@ public class SceneControlScript : MonoBehaviour
     public void goToAvatarSelect() {
         SceneManager.LoadScene("Avatar Select");
     }
+    public void goToHowToPlay() {
+        SceneManager.LoadScene("Tutorial");
+    }
+    public void playAgain(){
+	if (Globals.getLevel() == 1){
+	SceneManager.LoadScene("FirstLevel");
+	}
+	else if (Globals.getLevel() == 2){
+	SceneManager.LoadScene("SecondLevel");
+     	}
+	}
+
 }

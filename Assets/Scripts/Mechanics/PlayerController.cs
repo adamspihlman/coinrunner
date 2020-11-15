@@ -104,9 +104,10 @@ namespace Platformer.Mechanics
 
         protected override void ComputeVelocity()
         {
+            Debug.Log("Take off speed is: " + (jumpTakeOffSpeed + Globals.jumpMultiplier));
             if (jump && IsGrounded)
             {
-                velocity.y = jumpTakeOffSpeed * model.jumpModifier;
+                velocity.y = (jumpTakeOffSpeed + Globals.jumpMultiplier) * model.jumpModifier;
                 jump = false;
             }
             else if (stopJump)

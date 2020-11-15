@@ -31,9 +31,13 @@ namespace Platformer.Gameplay
                 player.animator.SetTrigger("hurt");
                 player.animator.SetBool("dead", true);
                 //Simulation.Schedule<PlayerSpawn>(2);
-                Globals.saveScore();
+                if (Globals.isUsernameSet)
+                {
+                    Globals.saveScore();
+                }
                 Globals.resetScore();
-                SceneManager.LoadScene("Leaderboard");
+                var arg = "Leaderboard" + Globals.getLevel();
+                SceneManager.LoadScene(arg);
 
             }
         }

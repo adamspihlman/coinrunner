@@ -16,16 +16,16 @@ public class MainMenu : MonoBehaviour
     }
     void Start()
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
         if (Globals.isUsernameSet && !updatedLbl)
         {
             welcomeLbl.text = "Welcome to Coin Runner, " + Globals.username + "!";
             updatedLbl = true;
         }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
     }
 }
