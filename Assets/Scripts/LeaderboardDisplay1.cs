@@ -46,6 +46,8 @@ public class LeaderboardDisplay1 : MonoBehaviour
     /// </summary>
     private LeaderboardData[] _data;
 
+
+
     /// <summary>
     /// Enum of options for the ordering of the leaderboard entries.
     /// </summary>
@@ -118,36 +120,67 @@ public class LeaderboardDisplay1 : MonoBehaviour
                 _go.GetComponentsInChildren<Text>()[0].text = "#" + (i+1).ToString();
                 _go.GetComponentsInChildren<Text>()[1].text = _data[i].playerName;
                 _go.GetComponentsInChildren<Text>()[2].text = _data[i].playerScore.ToString();
+
+                Debug.Log(_data[i].playerPowerup);
+                if (_data[i].playerPowerup == 0)//none
+                {
+                    _go.GetComponentsInChildren<Image>()[0].enabled = false;
+                    _go.GetComponentsInChildren<Image>()[1].enabled = false;
+                    _go.GetComponentsInChildren<Image>()[2].enabled = false;
+                }
+                else if(_data[i].playerPowerup == 1)//coin
+                {
+                    _go.GetComponentsInChildren<Image>()[0].enabled = true;
+                    _go.GetComponentsInChildren<Image>()[1].enabled = false;
+                    _go.GetComponentsInChildren<Image>()[2].enabled = false;
+                }
+                else if (_data[i].playerPowerup == 2)//jmp
+                {
+                    _go.GetComponentsInChildren<Image>()[0].enabled = false;
+                    _go.GetComponentsInChildren<Image>()[1].enabled = true;
+                    _go.GetComponentsInChildren<Image>()[2].enabled = false;
+                }
+                else if (_data[i].playerPowerup == 3)//invinc
+                {
+                    _go.GetComponentsInChildren<Image>()[0].enabled = false;
+                    _go.GetComponentsInChildren<Image>()[1].enabled = false;
+                    _go.GetComponentsInChildren<Image>()[2].enabled = true;
+                }
+
+
                 switch (_data[i].playerColor)
                 {
                     case Globals.PLAYER_BLUE:
-                        _go.GetComponentsInChildren<Image>()[0].color = blue;
+                        _go.GetComponentsInChildren<Image>()[3].color = blue;
                         break;
                     case Globals.PLAYER_BLACK:
-                        _go.GetComponentsInChildren<Image>()[0].color = black;
+                        _go.GetComponentsInChildren<Image>()[3].color = black;
                         break;
                     case Globals.PLAYER_RED:
-                        _go.GetComponentsInChildren<Image>()[0].color = red;
+                        _go.GetComponentsInChildren<Image>()[3].color = red;
                         break;
                     case Globals.PLAYER_GREEN:
-                        _go.GetComponentsInChildren<Image>()[0].color = green;
+                        _go.GetComponentsInChildren<Image>()[3].color = green;
                         break;
                     case Globals.PLAYER_PURPLE:
-                        _go.GetComponentsInChildren<Image>()[0].color = purple;
+                        _go.GetComponentsInChildren<Image>()[3].color = purple;
                         break;
                     case Globals.PLAYER_YELLOW:
-                        _go.GetComponentsInChildren<Image>()[0].color = yellow;
+                        _go.GetComponentsInChildren<Image>()[3].color = yellow;
                         break;
                     case Globals.PLAYER_ORANGE:
-                        _go.GetComponentsInChildren<Image>()[0].color = orange;
+                        _go.GetComponentsInChildren<Image>()[3].color = orange;
                         break;
                     case Globals.PLAYER_WHITE:
-                        _go.GetComponentsInChildren<Image>()[0].color = white;
+                        _go.GetComponentsInChildren<Image>()[3].color = white;
                         break;
                     case Globals.PLAYER_NAVY:
-                        _go.GetComponentsInChildren<Image>()[0].color = navy;
+                        _go.GetComponentsInChildren<Image>()[3].color = navy;
                         break;
                 }
+
+               if (_data[i].playerPowerup == 2)
+                    _go.GetComponentsInChildren<Image>()[1].color = _go.GetComponentsInChildren<Image>()[3].color;
             }
 
             if (i <= leaderboardDisplay.transform.childCount - 1)
@@ -159,36 +192,66 @@ public class LeaderboardDisplay1 : MonoBehaviour
                     _go.GetComponentsInChildren<Text>()[0].text = "#" + (i + 1).ToString();
                     _go.GetComponentsInChildren<Text>()[1].text = _data[i].playerName;
                     _go.GetComponentsInChildren<Text>()[2].text = _data[i].playerScore.ToString();
+
+
+                    if (_data[i].playerPowerup == 0)//none
+                    {
+                        _go.GetComponentsInChildren<Image>()[0].enabled = false;
+                        _go.GetComponentsInChildren<Image>()[1].enabled = false;
+                        _go.GetComponentsInChildren<Image>()[2].enabled = false;
+                    }
+                    else if (_data[i].playerPowerup == 1)//coin
+                    {
+                        _go.GetComponentsInChildren<Image>()[0].enabled = true;
+                        _go.GetComponentsInChildren<Image>()[1].enabled = false;
+                        _go.GetComponentsInChildren<Image>()[2].enabled = false;
+                    }
+                    else if (_data[i].playerPowerup == 2)//jmp
+                    {
+                        _go.GetComponentsInChildren<Image>()[0].enabled = false;
+                        _go.GetComponentsInChildren<Image>()[1].enabled = true;
+                        _go.GetComponentsInChildren<Image>()[2].enabled = false;
+                    }
+                    else if (_data[i].playerPowerup == 3)//invinc
+                    {
+                        _go.GetComponentsInChildren<Image>()[0].enabled = false;
+                        _go.GetComponentsInChildren<Image>()[1].enabled = false;
+                        _go.GetComponentsInChildren<Image>()[2].enabled = true;
+                    }
+
                     switch (_data[i].playerColor)
                     {
                         case Globals.PLAYER_BLUE:
-                            _go.GetComponentsInChildren<Image>()[0].color = blue;
+                            _go.GetComponentsInChildren<Image>()[3].color = blue;
                             break;
                         case Globals.PLAYER_BLACK:
-                            _go.GetComponentsInChildren<Image>()[0].color = black;
+                            _go.GetComponentsInChildren<Image>()[3].color = black;
                             break;
                         case Globals.PLAYER_RED:
-                            _go.GetComponentsInChildren<Image>()[0].color = red;
+                            _go.GetComponentsInChildren<Image>()[3].color = red;
                             break;
                         case Globals.PLAYER_GREEN:
-                            _go.GetComponentsInChildren<Image>()[0].color = green;
+                            _go.GetComponentsInChildren<Image>()[3].color = green;
                             break;
                         case Globals.PLAYER_PURPLE:
-                            _go.GetComponentsInChildren<Image>()[0].color = purple;
+                            _go.GetComponentsInChildren<Image>()[3].color = purple;
                             break;
                         case Globals.PLAYER_YELLOW:
-                            _go.GetComponentsInChildren<Image>()[0].color = yellow;
+                            _go.GetComponentsInChildren<Image>()[3].color = yellow;
                             break;
                         case Globals.PLAYER_ORANGE:
-                            _go.GetComponentsInChildren<Image>()[0].color = orange;
+                            _go.GetComponentsInChildren<Image>()[3].color = orange;
                             break;
                         case Globals.PLAYER_WHITE:
-                            _go.GetComponentsInChildren<Image>()[0].color = white;
+                            _go.GetComponentsInChildren<Image>()[3].color = white;
                             break;
                         case Globals.PLAYER_NAVY:
-                            _go.GetComponentsInChildren<Image>()[0].color = navy;
+                            _go.GetComponentsInChildren<Image>()[3].color = navy;
                             break;
                     }
+
+                    if (_data[i].playerPowerup == 2)
+                        _go.GetComponentsInChildren<Image>()[1].color = _go.GetComponentsInChildren<Image>()[3].color;
                 }
             }
         }

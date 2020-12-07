@@ -25,7 +25,13 @@ public class SceneControlScript : MonoBehaviour
         SceneManager.LoadScene("SecondLevel");
         Globals.setLevel(2);
     }
-    
+
+    public void startLevelThree()
+    {
+        SceneManager.LoadScene("ThirdLevel");
+        Globals.setLevel(3);
+    }
+
     public void goToBeginGame() {
         SceneManager.LoadScene("BeginLevel");
     }
@@ -40,6 +46,10 @@ public class SceneControlScript : MonoBehaviour
 
     public void goToLeaderboard2() {
         SceneManager.LoadScene("Leaderboard2");
+    }
+
+    public void goToLeaderboard3() {
+        SceneManager.LoadScene("Leaderboard3");
     }
     
     public void goToNameChange() {
@@ -63,6 +73,10 @@ public class SceneControlScript : MonoBehaviour
 	else if (Globals.getLevel() == 2){
 	SceneManager.LoadScene("SecondLevel");
      	}
+    else if (Globals.getLevel() == 3)
+        {
+            SceneManager.LoadScene("ThirdLevel");
+        }
 	}
 
 }

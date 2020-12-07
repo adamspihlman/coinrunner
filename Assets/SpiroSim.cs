@@ -15,6 +15,8 @@ public class SpiroSim : MonoBehaviour
     public bool breathing = false;
     public float Temp_Handoff = 1;
     
+    public static int mostRecentPowerup = 0;
+    
     public GameObject GoodJobText;
     public GameObject GreatJobText;
     public GameObject LoadingText;
@@ -24,9 +26,13 @@ public class SpiroSim : MonoBehaviour
     public GameObject KeepButton;
     public GameObject DiscardButton;
     
+    public GameObject SureButton;
+    public GameObject NotSureButton;
+    
     public GameObject PowerUpPromptText;
     public GameObject MultiplierButton;
     public GameObject JumpMultiplierButton;
+    public GameObject InvincibilityButton;
 
     public Slider volumeSlider;
     public Slider flowSlider;
@@ -41,8 +47,6 @@ public class SpiroSim : MonoBehaviour
     public void PrepareForUse() {
         Debug.Log("Preparing for use.");
         BreatheButton.gameObject.SetActive(true);
-        // flowSlider.gameObject.SetActive(true);
-        // volumeSlider.gameObject.SetActive(true);
         AlreadyEnabledText.SetActive(false);
         LoadingText.SetActive(false);
         KeepButton.gameObject.SetActive(false);
@@ -50,8 +54,13 @@ public class SpiroSim : MonoBehaviour
         PowerUpPromptText.SetActive(false);
         MultiplierButton.gameObject.SetActive(false);
         JumpMultiplierButton.gameObject.SetActive(false);
+        InvincibilityButton.gameObject.SetActive(false);
         timeLeft = 10;
         Globals.powerUpEnabled = false;
+        Globals.setPowerup(0);
+        Globals.coinMultiplier = 1;
+        Globals.isInvincible = 0;
+        Globals.jumpMultiplier = 0;
         breathing = false;
     }
 
@@ -263,21 +272,30 @@ public class SpiroSim : MonoBehaviour
     
     void Start() {
         Debug.Log("Starting the popup!");
+        Debug.Log("Globals.powerUpEnabled: " + Globals.powerUpEnabled);
+        //AreYouSureText.SetActive(false);
         GoodJobText.SetActive(false);
         GreatJobText.SetActive(false);
         LoadingText.SetActive(false);
         PowerUpPromptText.SetActive(false);
         MultiplierButton.gameObject.SetActive(false);
         JumpMultiplierButton.gameObject.SetActive(false);
+        InvincibilityButton.gameObject.SetActive(false);
         numZeroFlow = 0;
         totalFlow = 0;
         totalVolume = 0;
         timeLeft = 10;
         Time.timeScale = 1;
         breathing = false;
+        System.DateTime epochStart = new System.DateTime(1970, 1, 1, 0, 0, 0, System.DateTimeKind.Utc);
+        int cur_time = (int)(System.DateTime.UtcNow - epochStart).TotalSeconds;
+        //Debug.Log(" cur_time: " + cur_time);
+        //Debug.Log("mostRecentPowerup: " + mostRecentPowerup);
+        if (cur_time - mostRecentPowerup > 360) { Globals.powerUpEnabled = false; }
         if (!Globals.powerUpEnabled) {
             Globals.coinMultiplier = 1;
             Globals.jumpMultiplier = 0;
+            Globals.isInvincible = 0;
             PrepareForUse();
         } else {
             AlreadyEnabledText.SetActive(true);
@@ -292,8 +310,10 @@ public class SpiroSim : MonoBehaviour
     
     public void ApplyCoinMultiplier() {
         Debug.Log("Coin Multiplier Applied");
+        Globals.setPowerup(1);
         Globals.jumpMultiplier = 0;
-        if (numZeroFlow > 4) {
+        Globals.isInvincible = 0;
+        if (numZeroFlow > 5) {
             Globals.coinMultiplier = 2;
         }
         else if (totalFlow < 35) {
@@ -302,12 +322,16 @@ public class SpiroSim : MonoBehaviour
         else {
             Globals.coinMultiplier = 2;
         }
+        System.DateTime epochStart = new System.DateTime(1970, 1, 1, 0, 0, 0, System.DateTimeKind.Utc);
+        mostRecentPowerup = (int)(System.DateTime.UtcNow - epochStart).TotalSeconds;
     }
     
     public void ApplyJumpMultiplier() {
         Debug.Log("Jump Multiplier Applied");
+        Globals.setPowerup(2);
         Globals.coinMultiplier = 1;
-        if (numZeroFlow > 4) {
+        Globals.isInvincible = 0;
+        if (numZeroFlow > 5) {
             Globals.jumpMultiplier = 2;
         }
         else if (totalFlow < 35) {
@@ -316,6 +340,26 @@ public class SpiroSim : MonoBehaviour
         else {
             Globals.jumpMultiplier = 2;
         }
+        System.DateTime epochStart = new System.DateTime(1970, 1, 1, 0, 0, 0, System.DateTimeKind.Utc);
+        mostRecentPowerup = (int)(System.DateTime.UtcNow - epochStart).TotalSeconds;
+    }
+    
+    public void ApplyInvincibility() {
+        Debug.Log("Invincibility Applied");
+        Globals.setPowerup(3);
+        Globals.jumpMultiplier = 0;
+        Globals.coinMultiplier = 1;
+        if (numZeroFlow > 5) {
+            Globals.isInvincible = 1;
+        }
+        else if (totalFlow < 35) {
+            Globals.isInvincible = 2;
+        }
+        else {
+            Globals.isInvincible = 1;
+        }
+        System.DateTime epochStart = new System.DateTime(1970, 1, 1, 0, 0, 0, System.DateTimeKind.Utc);
+        mostRecentPowerup = (int)(System.DateTime.UtcNow - epochStart).TotalSeconds;
     }
     
     void Update() {
@@ -348,6 +392,7 @@ public class SpiroSim : MonoBehaviour
                     PowerUpPromptText.SetActive(true);
                     MultiplierButton.gameObject.SetActive(true);
                     JumpMultiplierButton.gameObject.SetActive(true);
+                    InvincibilityButton.gameObject.SetActive(true);
 
                     Time.timeScale = 0;
                     

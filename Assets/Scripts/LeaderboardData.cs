@@ -31,6 +31,8 @@ public class LeaderboardData
 
     public int playerColor;
 
+    public int playerPowerup;
+
     /// <summary>
     /// Blank constructor for the leaderboarddata class
     /// </summary>
@@ -41,11 +43,12 @@ public class LeaderboardData
     /// </summary>
     /// <param name="name">name to input</param>
     /// <param name="score">score to input</param>
-    public LeaderboardData(string name, float score, int color)
+    public LeaderboardData(string name, float score, int color, int powerup)
     {
         playerName = name;
         playerScore = score;
         playerColor = color;
+        playerPowerup = powerup;
     }
 }
 

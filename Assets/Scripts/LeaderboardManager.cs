@@ -25,14 +25,14 @@ public class LeaderboardManager : MonoBehaviour
     /// </summary>
     /// <param name="name">the player name to add with the new entry</param>
     /// <param name="score">the player score to add with the new entry</param>
-    public static void AddToLeaderboard(string name, float score, int level, int color)
+    public static void AddToLeaderboard(string name, float score, int level, int color, int powerup)
     {
         string SavePath = Application.persistentDataPath + "/Leaderboard/" + level + ".lsf";
 
         if (File.Exists(SavePath))
         {
             LeaderboardStore _storedData = LoadLeaderboardStore(level);
-            _storedData.leaderboardData.Add(new LeaderboardData(name, score, color));
+            _storedData.leaderboardData.Add(new LeaderboardData(name, score, color, powerup));
             BinaryFormatter Formatter = new BinaryFormatter();
             FileStream Stream = new FileStream(SavePath, FileMode.OpenOrCreate);
             Formatter.Serialize(Stream, _storedData);
@@ -42,7 +42,7 @@ public class LeaderboardManager : MonoBehaviour
         {
             SaveLeaderboardStore(new LeaderboardStore(), level);
             LeaderboardStore _storedData = new LeaderboardStore();
-            _storedData.leaderboardData.Add(new LeaderboardData(name, score, color));
+            _storedData.leaderboardData.Add(new LeaderboardData(name, score, color, powerup));
             BinaryFormatter Formatter = new BinaryFormatter();
             FileStream Stream = new FileStream(SavePath, FileMode.OpenOrCreate);
             Formatter.Serialize(Stream, _storedData);

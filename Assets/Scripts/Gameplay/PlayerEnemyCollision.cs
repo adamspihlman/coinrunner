@@ -22,27 +22,35 @@ namespace Platformer.Gameplay
         {
             var willHurtEnemy = player.Bounds.center.y >= enemy.Bounds.max.y;
 
-            if (willHurtEnemy)
+            if (willHurtEnemy || Globals.isInvincible > 0)
             {
-                var enemyHealth = enemy.GetComponent<Health>();
-                if (enemyHealth != null)
-                {
-                    enemyHealth.Decrement();
-                    if (!enemyHealth.IsAlive)
+                    if (Globals.isInvincible == 1) {
+                        Globals.currentScore += 2;
+                    } else if (Globals.isInvincible == 2) {
+                        Globals.currentScore += 3;
+                    } else {
+                        Globals.currentScore += 1;
+                    }
+                    
+                    var enemyHealth = enemy.GetComponent<Health>();
+                    if (enemyHealth != null)
+                    {
+                        enemyHealth.Decrement();
+                        if (!enemyHealth.IsAlive)
+                        {
+                            Schedule<EnemyDeath>().enemy = enemy;
+                            player.Bounce(2);
+                        }
+                        else
+                        {
+                            player.Bounce(7);
+                        }
+                    }
+                    else
                     {
                         Schedule<EnemyDeath>().enemy = enemy;
                         player.Bounce(2);
                     }
-                    else
-                    {
-                        player.Bounce(7);
-                    }
-                }
-                else
-                {
-                    Schedule<EnemyDeath>().enemy = enemy;
-                    player.Bounce(2);
-                }
             }
             else
             {

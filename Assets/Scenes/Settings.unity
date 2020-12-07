@@ -921,7 +921,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   welcomeLbl: {fileID: 0}
-  updatedLbl: 0
+  SoundOnButton: {fileID: 0}
+  SoundOffButton: {fileID: 0}
+  nouns: []
+  adjs: []
 --- !u!114 &1118537690
 MonoBehaviour:
   m_ObjectHideFlags: 0
