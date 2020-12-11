@@ -88,7 +88,7 @@ public static class Globals
     public static void setPowerup(int powerup)
     {
         currentPowerup = powerup;
-        if (powerup == 1) { powerUpEnabled = true;}
+        if (powerup != 0) { powerUpEnabled = true;}
         else { powerUpEnabled = false; }
     }
 
